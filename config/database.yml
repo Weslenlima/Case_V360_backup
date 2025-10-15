@@ -81,20 +81,18 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  primary: &primary_production
-    <<: *default
-    database: v360_case_production
-    username: v360_case
-    password: <%= ENV["V360_CASE_DATABASE_PASSWORD"] %>
+  primary:
+    url: <%= ENV["DATABASE_URL"] %>
+    pool: 5
   cache:
-    <<: *primary_production
-    database: v360_case_production_cache
+    url: <%= ENV["DATABASE_URL"] %>
+    pool: 5
     migrations_paths: db/cache_migrate
   queue:
-    <<: *primary_production
-    database: v360_case_production_queue
+    url: <%= ENV["DATABASE_URL"] %>
+    pool: 5
     migrations_paths: db/queue_migrate
   cable:
-    <<: *primary_production
-    database: v360_case_production_cable
+    url: <%= ENV["DATABASE_URL"] %>
+    pool: 5
     migrations_paths: db/cable_migrate
